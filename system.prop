@@ -155,3 +155,5 @@ persist.radio.rat_on=combine
 persist.radio.multisim.config=dsds
 
 ro.sf.lcd_density=320
+
+ro.vendor.extension_library=/vendor/lib/libqc-opt.so
