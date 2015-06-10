@@ -191,7 +191,7 @@ PRODUCT_PACKAGES += \
     services-ext \
     init.cne.rc
 
-PRODUCT_PROPERTY_OVERRIDES +=
+PRODUCT_PROPERTY_OVERRIDES += \
     persist.cne.feature=4
 
 endif
@@ -217,7 +217,7 @@ PRODUCT_PACKAGES += \
     init.qcom.rootagent.sh \
     init.qcom.sdio.sh \
     init.qcom.uicc.sh \
-    init.qcom.wifi.sh \
+    init.qcom.wifi.sh
 
 PRODUCT_PACKAGES += \
     fstab.qcom \
