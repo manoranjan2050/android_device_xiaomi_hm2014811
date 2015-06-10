@@ -153,3 +153,5 @@ ro.build.hardware.version=P1
 persist.radio.rat_on=combine
 
 persist.radio.multisim.config=dsds
+
+ro.sf.lcd_density=320
