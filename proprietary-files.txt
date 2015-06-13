@@ -62,6 +62,8 @@ vendor/lib/libchromatix_ov8865_sunny_preview.so
 vendor/lib/libchromatix_ov8865_sunny_snapshot.so
 vendor/lib/libchromatix_ov8865_sunny_video_hd.so
 vendor/lib/libchromatix_ov8865_sunny_zsl.so
+vendor/lib/libFaceDeform.so
+vendor/lib/libFaceProc.so
 vendor/lib/libjpegdhw.so
 vendor/lib/libjpegehw.so
 vendor/lib/libmmcamera2_c2d_module.so
@@ -169,6 +171,17 @@ etc/firmware/a300_pfp.fw
 etc/firmware/a300_pm4.fw
 
 # Media
+lib/libOmxAacEnc.so
+lib/libOmxAmrEnc.so
+lib/libOmxCore.so
+lib/libOmxEvrcEnc.so
+lib/libOmxQcelp13Enc.so
+lib/libOmxVdec.so
+lib/libOmxVenc.so
+lib/libstagefrighthw.so
+lib/libc2dcolorconvert.so
+lib/libdivxdrmdecrypt.so
+lib/libstagefrighthw.so
 vendor/lib/libDivxDrm.so
 vendor/lib/libExtendedExtractor.so
 -vendor/lib/libHevcSwDecoder.so
@@ -257,21 +270,16 @@ etc/firmware/venus.mdt
 # Modules
 lib/modules/pronto/pronto_wlan.ko
 lib/modules/ansi_cprng.ko
-lib/modules/dma_test.ko
-lib/modules/evbug.ko
 lib/modules/gpio_axis.ko
 lib/modules/gpio_event.ko
 lib/modules/gpio_input.ko
 lib/modules/gpio_matrix.ko
 lib/modules/gpio_output.ko
-lib/modules/ice40-hcd.ko
 lib/modules/mcDrvModule.ko
 lib/modules/mcKernelApi.ko
-lib/modules/mmc_block_test.ko
-lib/modules/mmc_test.ko
 lib/modules/msm-buspm-dev.ko
 lib/modules/oprofile.ko
 lib/modules/qcrypto.ko
 lib/modules/radio-iris-transport.ko
 lib/modules/spidev.ko
-lib/modules/test-iosched.ko
+lib/modules/ice40-hcd.ko
