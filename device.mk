@@ -59,6 +59,7 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
 
 # Audio
 PRODUCT_PACKAGES += \
+    audiod \
     audio.a2dp.default \
     audio.primary.msm8916 \
     audio.r_submix.default \
