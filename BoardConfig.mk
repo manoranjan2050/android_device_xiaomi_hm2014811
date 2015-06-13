@@ -153,11 +153,6 @@ WLAN_MODULES:
 
 TARGET_KERNEL_MODULES += WLAN_MODULES
 
-# QC PROPRIETARY
-ifneq ($(QCPATH),)
-BOARD_USES_QCNE := true
-endif
-
 # Vold
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
 
