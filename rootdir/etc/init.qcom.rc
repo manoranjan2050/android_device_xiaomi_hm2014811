@@ -253,7 +253,6 @@ on fs
 
 on post-fs
     export_rc /system/etc/init.cne.rc
-    export LD_PRELOAD /vendor/lib/libNimsWrap.so
 
 # msm specific files that need to be created on /data
 on post-fs-data
