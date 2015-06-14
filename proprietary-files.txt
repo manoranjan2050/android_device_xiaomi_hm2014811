@@ -121,21 +121,12 @@ vendor/lib/mediadrm/libwvdrmengine.so
 
 # GPS
 bin/location-mq
-bin/xtwifi-client
-bin/xtwifi-inet-agent
-etc/lowi.conf
 etc/permissions/com.qualcomm.location.xml
-etc/xtwifi.conf
--lib/hw/gps.default.so
--lib/libgps.utils.so
 -lib/libloc_api_v02.so
--lib/libloc_core.so
 -lib/libloc_ds_api.so
--lib/libloc_eng.so
 -priv-app/com.qualcomm.location.apk
 vendor/etc/calmodule.cfg
 vendor/lib/hw/flp.default.so
-vendor/lib/libalarmservice_jni.so
 vendor/lib/libgeofence.so
 vendor/lib/libizat_core.so
 vendor/lib/liblbs_core.so
