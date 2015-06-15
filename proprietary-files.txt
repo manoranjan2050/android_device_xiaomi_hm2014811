@@ -158,17 +158,6 @@ etc/firmware/a300_pfp.fw
 etc/firmware/a300_pm4.fw
 
 # Media
-lib/libOmxAacEnc.so
-lib/libOmxAmrEnc.so
-lib/libOmxCore.so
-lib/libOmxEvrcEnc.so
-lib/libOmxQcelp13Enc.so
-lib/libOmxVdec.so
-lib/libOmxVenc.so
-lib/libstagefrighthw.so
-lib/libc2dcolorconvert.so
-lib/libdivxdrmdecrypt.so
-lib/libstagefrighthw.so
 vendor/lib/libDivxDrm.so
 vendor/lib/libExtendedExtractor.so
 -vendor/lib/libHevcSwDecoder.so
