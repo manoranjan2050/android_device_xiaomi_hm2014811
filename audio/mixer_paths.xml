@@ -76,8 +76,8 @@
     <ctl name="EAR_S" value="ZERO" />
     <ctl name="HPHL" value="ZERO" />
     <ctl name="HPHR" value="ZERO" />
-    <ctl name="HPH SPK" value="ZERO"/> 
-    <ctl name="Lineout_1 amp" value="DISABLE"/> 
+    <ctl name="HPH SPK" value="ZERO"/>
+    <ctl name="Lineout_1 amp" value="DISABLE"/>
     <ctl name="SPK DAC Switch" value="0" />
     <ctl name="Speaker Boost" value="ENABLE" />
     <ctl name="MICBIAS CAPLESS Switch" value="0" />
@@ -529,8 +529,8 @@
     </path>
 
     <path name="speaker">
-        <ctl name="RX2 MIX1 INP1" value="RX2"/> 
-        <ctl name="RDAC2 MUX" value="RX2"/> 
+        <ctl name="RX2 MIX1 INP1" value="RX2"/>
+        <ctl name="RDAC2 MUX" value="RX2"/>
         <ctl name="HPHR" value="Switch"/> 
         <ctl name="MI2S_RX Channels" value="One" />
         <ctl name="RX1 MIX1 INP1" value="RX1" />
