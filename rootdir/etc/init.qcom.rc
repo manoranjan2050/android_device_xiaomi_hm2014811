@@ -229,19 +229,22 @@ on property:service.bootanim.exit=1
     write /sys/module/msm_pm/modes/cpu1/power_collapse/idle_enabled 1
     write /sys/module/msm_pm/modes/cpu2/power_collapse/idle_enabled 1
     write /sys/module/msm_pm/modes/cpu3/power_collapse/idle_enabled 1
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ondemand
 
 on property:init.svc.bootanim=stopped
     # enable governor
+    write /sys/module/msm_thermal/core_control/enabled 0
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 800000
     write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay "25000 1094400:50000"
     write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 90
-    write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 30000
     write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 998400
     write /sys/devices/system/cpu/cpufreq/interactive/io_is_busy 0
-    write /sys/devices/system/cpu/cpufreq/interactive/target_loads "1 800000:85 998400:90 1094400:80"
     write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 50000
     write /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor 50000
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 800000
+    write /sys/devices/system/cpu/cpufreq/interactive/target_loads "1 800000:85 998400:90 1094400:80"
+    write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 30000
+    write /sys/module/msm_thermal/core_control/enabled 1
 
     # bring all CPUs online
     write /sys/devices/system/cpu/cpu1/online 1
@@ -567,6 +570,8 @@ service fuse_usbdisk /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw
 
 service charger /charger
     class charger
+    group log
+    seclabel u:r:healthd:s0
 
 service ssr_diag /system/bin/ssr_diag
     class late_start
@@ -583,16 +588,6 @@ on property:persist.usb.hvdcp.detect=true
 
 on property:persist.usb.hvdcp.detect=false
     stop hvdcp
-
-service qbcharger /charger -m 1
-    disabled
-    oneshot
-
-on property:sys.qbcharger.enable=true
-    start qbcharger
-
-on property:sys.qbcharger.enable=false
-    stop qbcharger
 
 #start camera server as daemon
 service qcamerasvr /system/bin/mm-qcamera-daemon
