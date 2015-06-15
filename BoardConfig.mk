@@ -57,6 +57,9 @@ BOARD_HAVE_BLUETOOTH_QCOM := true
 BLUETOOTH_HCI_USE_MCT := true
 
 # Camera
+BOARD_CAMERA_SENSORS := \
+    ov2680_5987fhq \
+    ov8865_q8v18a
 TARGET_USE_VENDOR_CAMERA_EXT := true
 USE_DEVICE_SPECIFIC_CAMERA := true
 
@@ -110,7 +113,8 @@ TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
 TARGET_USERIMAGES_USE_EXT4 := true
 
 # RIL
-COMMON_GLOBAL_CFLAGS += -DRIL_SUPPORTS_SEEK
+TARGET_RIL_VARIANT := caf
+PROTOBUF_SUPPORTED := true
 
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
@@ -125,9 +129,9 @@ BOARD_USES_QC_TIME_SERVICES := true
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
 
 WLAN_MODULES:
-	ln -sf /system/lib/modules/pronto/pronto_wlan.ko $(TARGET_OUT)/lib/modules/wlan.ko
+	ln -sf $(KERNEL_MODULES_OUT)/pronto/pronto_wlan.ko $(KERNEL_MODULES_OUT)/wlan.ko
 
-TARGET_KERNEL_MODULES += WLAN_MODULES
+TARGET_KERNEL_MODULES := WLAN_MODULES
 
 # Wifi
 BOARD_HAS_QCOM_WLAN := true
