@@ -176,10 +176,6 @@ on boot
     # an ack packet comes out of order
     write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
 
-    # NFC local data and nfcee xml storage
-    mkdir /data/nfc 0770 nfc nfc
-    mkdir /data/nfc/param 0770 nfc nfc
-
     # Set the console loglevel to < KERN_INFO
     # Set the default message loglevel to KERN_INFO
     write /proc/sys/kernel/printk "6 6 1 7"
@@ -191,6 +187,29 @@ on boot
     chown 0774 /sys/class/compass/akm09911/shipmenttest
     chown system system /sys/class/sensors/yas537-mag/yas_self_test
     chown 0774 /sys/class/sensors/yas537-mag/yas_self_test
+
+    # LEDs
+    chown system system /sys/class/leds/blue/brightness
+    chmod 0660 /sys/class/leds/blue/brightness
+    chown system system /sys/class/leds/blue/blink
+    chmod 0660 /sys/class/leds/blue/blink
+
+    chown system system /sys/class/leds/green/brightness
+    chmod 0660 /sys/class/leds/green/brightness
+    chown system system /sys/class/leds/green/blink
+    chmod 0660 /sys/class/leds/green/blink
+
+    chown system system /sys/class/leds/red/brightness
+    chmod 0660 /sys/class/leds/red/brightness
+    chown system system /sys/class/leds/red/blink
+    chmod 0660 /sys/class/leds/red/blink
+
+    # Torch
+    chown system camera /sys/class/leds/torch-light/brightness
+    chmod 0660 /sys/class/leds/torch-light/brightness
+
+    # camera sockets
+    mkdir /data/misc/camera 0770 camera camera
 
 on property:service.bootanim.exit=1
     write /sys/module/lpm_levels/enable_low_power/l2 4
@@ -234,28 +253,21 @@ on property:init.svc.bootanim=stopped
 
 on fs
     mount_all fstab.qcom
+    mkdir /persist/data 0700 system system
     restorecon_recursive /persist
     setprop ro.crypto.fuse_sdcard true
-
-    # Keeping following partitions outside fstab file. As user may not have
-    # these partition flashed on the device. Failure to mount any partition in fstab file
-    # results in failure to launch late-start class.
-
-    wait /dev/block/bootdevice/by-name/cache
-    mount ext4 /dev/block/bootdevice/by-name/cache /cache check nosuid nodev barrier=1
-
-    wait /dev/block/bootdevice/by-name/persist
-    mount ext4 /dev/block/bootdevice/by-name/persist /persist nosuid nodev barrier=1
-
-    wait /dev/block/bootdevice/by-name/modem
-    mount vfat /dev/block/bootdevice/by-name/modem /firmware ro shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337
-    #write /sys/kernel/boot_adsp/boot 1
 
 on post-fs
     export_rc /system/etc/init.cne.rc
 
 # msm specific files that need to be created on /data
 on post-fs-data
+    mkdir /data/misc/camera 0770 camera camera
+
+    # NFC local data and nfcee xml storage
+    mkdir /data/nfc 0770 nfc nfc
+    mkdir /data/nfc/param 0770 nfc nfc
+
     mkdir /data/media 0770 media_rw media_rw
     restorecon_recursive /data/media
 
@@ -264,6 +276,9 @@ on post-fs-data
     mkdir /tombstones/lpass 0771 system system
     mkdir /tombstones/wcnss 0771 system system
     mkdir /tombstones/dsps 0771 system system
+
+    mkdir /persist/data/sfs 0700 system system
+    mkdir /persist/data/tz 0700 system system
 
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
 
@@ -344,26 +359,6 @@ on post-fs-data
     #Create a folder for SRS to be able to create a usercfg file
     mkdir /data/data/media 0770 media media
 
-    # LEDs
-    chown system system /sys/class/leds/blue/brightness
-    chmod 0660 /sys/class/leds/blue/brightness
-    chown system system /sys/class/leds/blue/blink
-    chmod 0660 /sys/class/leds/blue/blink
-
-    chown system system /sys/class/leds/green/brightness
-    chmod 0660 /sys/class/leds/green/brightness
-    chown system system /sys/class/leds/green/blink
-    chmod 0660 /sys/class/leds/green/blink
-
-    chown system system /sys/class/leds/red/brightness
-    chmod 0660 /sys/class/leds/red/brightness
-    chown system system /sys/class/leds/red/blink
-    chmod 0660 /sys/class/leds/red/blink
-
-    # Torch
-    chown system camera /sys/class/leds/torch-light/brightness
-    chmod 0660 /sys/class/leds/torch-light/brightness
-
 # Allow usb charging to be disabled peristently
 on property:persist.sys.chgdisabled=1
     write /sys/class/power_supply/battery/charging_enabled 0
@@ -408,6 +403,7 @@ on property:ro.boot.emmc=true
 service config_bluetooth /system/bin/sh /system/etc/init.qcom.bt.sh "onboot"
     class core
     user root
+    seclabel u:r:bluetooth_loader:s0
     oneshot
 
 service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
@@ -415,6 +411,7 @@ service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
     user bluetooth
     group bluetooth net_bt_admin
     disabled
+    seclabel u:r:bluetooth_loader:s0
     oneshot
 
 on property:bluetooth.hciattach=true
@@ -687,7 +684,6 @@ service wcnss-service /system/bin/wcnss_service
     class late_start
     user system
     group system wifi radio
-    oneshot
 
 service setup_fs /system/bin/setup_fs /dev/block/platform/7824900.sdhci/by-name/userdata
     class core
