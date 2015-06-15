@@ -14,8 +14,6 @@
 # limitations under the License.
 #
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
-
 $(call inherit-product-if-exists, vendor/xiaomi/hm2014811/hm2014811-vendor.mk)
 
 # Overlay
@@ -30,6 +28,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
     frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
     frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
+    frameworks/native/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
     frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
     frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
     frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
@@ -64,11 +63,8 @@ PRODUCT_PACKAGES += \
     audio.primary.msm8916 \
     audio.r_submix.default \
     audio.usb.default \
-    audio_policy.msm8916 \
-    libaudio-resampler \
     libqcompostprocbundle \
     libqcomvisualizer \
-    libqcomvoiceprocessing \
     tinymix
 
 # Audio configuration
@@ -90,14 +86,13 @@ PRODUCT_PACKAGES += \
     com.dsi.ant.antradio_library \
     libantradio
 
-# Camera
-PRODUCT_PACKAGES += \
-    camera.msm8916
-
 # Charger
 PRODUCT_PACKAGES += \
-    charger \
     charger_res_images
+
+# Connectivity Engine support
+PRODUCT_PACKAGES += \
+    libcnefeatureconfig
 
 # CRDA
 PRODUCT_PACKAGES += \
@@ -198,9 +193,9 @@ PRODUCT_PACKAGES += \
     init.recovery.qcom.rc \
     ueventd.qcom.rc
 
-# Torch
+# RIL
 PRODUCT_PACKAGES += \
-    Torch
+    libxml2
 
 # USB
 PRODUCT_PACKAGES += \
@@ -208,6 +203,8 @@ PRODUCT_PACKAGES += \
 
 # Wifi
 PRODUCT_PACKAGES += \
+    libqsap_sdk \
+    libQWiFiSoftApCfg \
     libwpa_client \
     hostapd \
     dhcpcd.conf \
