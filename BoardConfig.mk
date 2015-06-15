@@ -13,9 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# inherit from the proprietary version
--include vendor/xiaomi/hm2014811/BoardConfigVendor.mk
-
 DEVICE_PATH := device/xiaomi/hm2014811
 
 TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
@@ -48,13 +45,12 @@ TARGET_KERNEL_SOURCE := kernel/qcom/msm8916
 TARGET_KERNEL_CONFIG := msm8916_defconfig
 TARGET_PREBUILT_KERNEL := device/xiaomi/hm2014811/kernel
 
-# Audio
-AUDIO_FEATURE_DISABLED_DS1_DOLBY_DDP := true
-BOARD_USES_ALSA_AUDIO := true
-TARGET_QCOM_AUDIO_VARIANT := caf
-
 # ANT+
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
+
+# Audio
+AUDIO_FEATURE_LOW_LATENCY_PRIMARY := true
+BOARD_USES_ALSA_AUDIO := true
 
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
@@ -63,6 +59,7 @@ BOARD_HAVE_BLUETOOTH_QCOM := true
 BLUETOOTH_HCI_USE_MCT := true
 
 # Camera
+TARGET_USE_VENDOR_CAMERA_EXT := true
 USE_DEVICE_SPECIFIC_CAMERA := true
 
 # Crypto
@@ -71,17 +68,15 @@ TARGET_HW_DISK_ENCRYPTION := true
 # Display
 BOARD_EGL_CFG := $(DEVICE_PATH)/configs/egl.cfg
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
-TARGET_NO_COMPAT_GRALLOC_PERFORM := true
-TARGET_QCOM_DISPLAY_VARIANT := caf-new
+OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
+TARGET_CONTINUOUS_SPLASH_ENABLED := true
 TARGET_USES_C2D_COMPOSITION := true
 TARGET_USES_ION := true
 USE_OPENGL_RENDERER := true
-TARGET_CONTINUOUS_SPLASH_ENABLED := true
-
-OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
 # FM
 TARGET_QCOM_NO_FM_FIRMWARE := true
+AUDIO_FEATURE_ENABLED_FM := true
 
 # GPS
 TARGET_GPS_HAL_PATH := $(DEVICE_PATH)/gps
@@ -94,10 +89,6 @@ TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
 
-# Media
-TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
-TARGET_QCOM_MEDIA_VARIANT := caf-new
-
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_BOOTIMAGE_PARTITION_SIZE := 33554432
@@ -105,21 +96,14 @@ BOARD_RECOVERYIMAGE_PARTITION_SIZE := 33554432
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1073741824
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 5939100672 # 5939117056 - 16384
 
-# Qualcomm support
-COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE
-COMMON_GLOBAL_CFLAGS += -DQCOM_BSP
-BOARD_USES_QCOM_HARDWARE := true
-TARGET_USES_QCOM_BSP := true
-
 # Power
 TARGET_POWERHAL_VARIANT := qcom
 
+# Qualcomm support
+BOARD_USES_QCOM_HARDWARE := true
+
 # Recovery
-BOARD_HAS_NO_SELECT_BUTTON := true
-BOARD_RECOVERY_SWIPE := true
-BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
-TARGET_RECOVERY_PIXEL_FORMAT := "RGBA_8888"
 TARGET_USERIMAGES_USE_EXT4 := true
 
 # RIL
@@ -127,19 +111,20 @@ COMMON_GLOBAL_CFLAGS += -DRIL_SUPPORTS_SEEK
 
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
+
 BOARD_SEPOLICY_DIRS += \
 	device/xiaomi/hm2014811/sepolicy
 
 # Time services
 BOARD_USES_QC_TIME_SERVICES := true
 
+# Vold
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
+
 WLAN_MODULES:
 	ln -sf /system/lib/modules/pronto/pronto_wlan.ko $(TARGET_OUT)/lib/modules/wlan.ko
 
 TARGET_KERNEL_MODULES += WLAN_MODULES
-
-# Vold
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
 
 # Wifi
 BOARD_HAS_QCOM_WLAN := true
@@ -154,3 +139,6 @@ TARGET_USES_WCNSS_CTRL := true
 WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wlan.ko"
 WIFI_DRIVER_MODULE_NAME := "wlan"
 WPA_SUPPLICANT_VERSION := VER_0_8_X
+
+# inherit from the proprietary version
+-include vendor/xiaomi/hm2014811/BoardConfigVendor.mk
