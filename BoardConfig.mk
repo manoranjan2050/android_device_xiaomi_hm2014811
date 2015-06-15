@@ -34,7 +34,7 @@ TARGET_CPU_VARIANT := cortex-a53
 
 # Kernel
 BOARD_CUSTOM_BOOTIMG_MK := $(DEVICE_PATH)/mkbootimg.mk
-BOARD_KERNEL_CMDLINE := ramoops_memreserve=2M androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_SEPARATED_DT := true
@@ -77,6 +77,9 @@ USE_OPENGL_RENDERER := true
 # FM
 TARGET_QCOM_NO_FM_FIRMWARE := true
 AUDIO_FEATURE_ENABLED_FM := true
+
+# Fonts
+EXTENDED_FONT_FOOTPRINT := true
 
 # GPS
 TARGET_GPS_HAL_PATH := $(DEVICE_PATH)/gps
