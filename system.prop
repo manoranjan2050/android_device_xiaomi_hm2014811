@@ -79,4 +79,4 @@ persist.timed.enable=true
 
 # perf
 ro.min_freq=800000
-ro.vendor.extension_library=/vendor/lib/libqc-opt.so
+ro.vendor.extension_library=/vendor/lib/libqti-perfd-client.so

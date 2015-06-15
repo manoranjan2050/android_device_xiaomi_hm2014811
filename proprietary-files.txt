@@ -18,7 +18,6 @@ vendor/lib/soundfx/libqcvirt.so
 bin/btnvtool
 bin/hci_qcomm_init
 vendor/lib/libbtnv.so
-vendor/lib/liboi_sbc_decoder.so
 
 # Camera
 bin/mm-qcamera-daemon
@@ -89,7 +88,6 @@ vendor/lib/libmmcamera_ov8865_q8v18a.so
 vendor/lib/libmmcamera_sunny_q8v18a_eeprom.so
 vendor/lib/libmmcamera_tintless_algo.so
 vendor/lib/libmmcamera_tintless_bg_pca_algo.so
-vendor/lib/libmmcamera_tuning.so
 vendor/lib/libmmcamera_wavelet_lib.so
 vendor/lib/libmmipl.so
 vendor/lib/libmmjpeg.so
@@ -106,11 +104,9 @@ etc/firmware/cpp_firmware_v1_4_0.fw
 # DRM
 bin/qseecomd
 vendor/lib/libdrmdecrypt.so
-vendor/lib/drm/libdrmprplugin.so
 vendor/lib/drm/libdrmwvmplugin.so
 vendor/lib/libdrmfs.so
 vendor/lib/libdrmtime.so
-vendor/lib/libprdrmdecrypt.so
 vendor/lib/libQSEEComAPI.so
 vendor/lib/librpmb.so
 vendor/lib/libssd.so
@@ -124,7 +120,7 @@ bin/location-mq
 etc/permissions/com.qualcomm.location.xml
 -lib/libloc_api_v02.so
 -lib/libloc_ds_api.so
--priv-app/com.qualcomm.location.apk
+-priv-app/com.qualcomm.location/com.qualcomm.location.apk
 vendor/etc/calmodule.cfg
 vendor/lib/hw/flp.default.so
 vendor/lib/libgeofence.so
@@ -186,8 +182,8 @@ vendor/lib/libOmxQcelp13Dec.so
 vendor/lib/libSHIMDivxDrm.so
 
 # Perf
-bin/mpdecision
-vendor/lib/libqc-opt.so
+bin/perfd
+vendor/lib/libqti-perfd-client.so
 
 # Postprocessing
 bin/mm-pp-daemon
@@ -199,7 +195,6 @@ vendor/lib/libmm-abl-oem.so
 bin/irsc_util
 vendor/lib/libdiag.so
 vendor/lib/libdsi_netctrl.so
-vendor/lib/libdsnetutils.so
 vendor/lib/libdsutils.so
 vendor/lib/libidl.so
 vendor/lib/libqcci_legacy.so
@@ -209,14 +204,14 @@ vendor/lib/libqmi_cci.so
 vendor/lib/libqmi_client_qmux.so
 vendor/lib/libqmi_common_so.so
 vendor/lib/libqmi_csi.so
-vendor/lib/libqmi_csvt_srvc.so
 vendor/lib/libqmi_encdec.so
 vendor/lib/libqmiservices.so
 vendor/lib/libqmi.so
+vendor/lib/libsmemlog.so
 
 # Radio
--app/qcrilmsgtunnel.apk
--app/shutdownlistener.apk
+-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
+-app/shutdownlistener/shutdownlistener.apk
 bin/netmgrd
 bin/qmuxd
 bin/radish
@@ -230,8 +225,10 @@ lib/librmnetctl.so
 vendor/lib/libconfigdb.so
 vendor/lib/libmdmdetect.so
 vendor/lib/libnetmgr.so
+vendor/lib/libperipheral_client.so
 vendor/lib/libril-qc-qmi-1.so
 vendor/lib/libril-qcril-hook-oem.so
+vendor/lib/libsystem_health_mon.so
 vendor/lib/libxml.so
 
 # Sensors
@@ -245,7 +242,7 @@ vendor/lib/libthermalclient.so
 vendor/lib/libthermalioctl.so
 
 # Time services
--app/TimeService.apk
+-app/TimeService/TimeService.apk
 bin/time_daemon
 -vendor/lib/libtime_genoff.so
 vendor/lib/libTimeService.so
