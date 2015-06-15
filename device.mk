@@ -180,11 +180,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     power.msm8916
 
-# QRNGD
-PRODUCT_PACKAGES += \
-    qrngd \
-    qrngp
-
 # Ramdisk
 PRODUCT_PACKAGES += \
     init.crda.sh \
